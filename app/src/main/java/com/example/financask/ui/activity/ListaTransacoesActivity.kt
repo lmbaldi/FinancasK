@@ -18,7 +18,7 @@ class ListaTransacoesActivity : AppCompatActivity() {
 
         val transacoes = listOf(
             Transacao(BigDecimal(20.5), "Comida", Calendar.getInstance()),
-            Transacao(BigDecimal(20.5), "Comida", Calendar.getInstance()),
+            Transacao(BigDecimal(100), "Economia", Calendar.getInstance()),
         )
 
         lista_transacoes_listview.setAdapter(ListaTransacoesAdapter(transacoes, this))
