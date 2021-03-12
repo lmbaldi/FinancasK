@@ -33,7 +33,7 @@ class ListaTransacoesAdapter(transacoes: List<Transacao>, context: Context) : Ba
 
         val transacao = transacoes[position]
 
-        viewCriada.transacao_valor.setText(transacao.getValor().toString())
+        viewCriada.transacao_valor.setText(transacao.valor.toString())
 
         return viewCriada
     }
