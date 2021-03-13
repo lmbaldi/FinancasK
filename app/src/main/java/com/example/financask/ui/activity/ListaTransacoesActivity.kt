@@ -18,10 +18,12 @@ class ListaTransacoesActivity : AppCompatActivity() {
         setContentView(R.layout.activity_lista_transacoes)
 
         val transacoes = listOf(
-            Transacao(BigDecimal(20.5), "Comida", Tipo.DESPESA),
-            Transacao(BigDecimal(100), "Economia",Tipo.RECEITA),
+            Transacao(valor = BigDecimal(20.5), tipo = Tipo.DESPESA),
+            Transacao(valor = BigDecimal(100), categoria ="Economia",tipo = Tipo.RECEITA),
+            Transacao(valor = BigDecimal(250),tipo = Tipo.DESPESA),
+            Transacao(valor = BigDecimal(750),categoria = "Premio", tipo = Tipo.RECEITA),
         )
 
-        lista_transacoes_listview.setAdapter(ListaTransacoesAdapter(transacoes, this))
+        lista_transacoes_listview.adapter = ListaTransacoesAdapter(transacoes, this)
     }
 }
