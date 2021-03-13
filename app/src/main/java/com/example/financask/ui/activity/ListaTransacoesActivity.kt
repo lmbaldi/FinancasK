@@ -10,7 +10,6 @@ import com.example.financask.ui.adapter.ListaTransacoesAdapter
 import kotlinx.android.synthetic.main.activity_lista_transacoes.*
 import java.util.*
 
-
 class ListaTransacoesActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,7 +17,7 @@ class ListaTransacoesActivity : AppCompatActivity() {
         setContentView(R.layout.activity_lista_transacoes)
 
         val transacoes = listOf(
-            Transacao(valor = BigDecimal(20.5), tipo = Tipo.DESPESA),
+            Transacao(valor = BigDecimal(20.5), categoria = "Almoço de final de semana", tipo = Tipo.DESPESA),
             Transacao(valor = BigDecimal(100), categoria ="Economia",tipo = Tipo.RECEITA),
             Transacao(valor = BigDecimal(250),tipo = Tipo.DESPESA),
             Transacao(valor = BigDecimal(750),categoria = "Premio", tipo = Tipo.RECEITA),

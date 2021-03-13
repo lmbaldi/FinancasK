@@ -11,6 +11,7 @@ import kotlinx.android.synthetic.main.transacao_item.view.*
 import com.example.financask.R
 import com.example.financask.model.Tipo
 import com.example.financask.model.Transacao
+import com.example.financask.extension.limitarEmAte
 import com.example.financask.extension.formataParaBrasileiro
 import com.example.financask.extension.formatarParaBrasileiro
 
@@ -30,6 +31,8 @@ class ListaTransacoesAdapter(transacoes: List<Transacao>, context: Context) : Ba
     override fun getItemId(position: Int): Long {
         return 0
     }
+
+    private val limiteDaCategoria = 16
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
 
@@ -51,7 +54,7 @@ class ListaTransacoesAdapter(transacoes: List<Transacao>, context: Context) : Ba
         }
 
         viewCriada.transacao_valor.text = transacao.valor.formatarParaBrasileiro()
-        viewCriada.transacao_categoria.text = transacao.categoria
+        viewCriada.transacao_categoria.text = transacao.categoria.limitarEmAte(limiteDaCategoria)
         viewCriada.transacao_data.text = transacao.data.formataParaBrasileiro()
 
         return viewCriada
