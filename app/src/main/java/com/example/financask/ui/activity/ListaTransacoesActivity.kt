@@ -19,15 +19,17 @@ class ListaTransacoesActivity : AppCompatActivity() {
 
         val transacoes: List<Transacao> = transacoesDeExemplo()
 
-        configuraResumo(transacoes)
+        configurarResumo(transacoes)
 
         configurarLista(transacoes)
     }
 
-    private fun configuraResumo(transacoes: List<Transacao>) {
+    private fun configurarResumo(transacoes: List<Transacao>) {
         //pega view da activity
         val view: View = window.decorView
-        ResumoView(view).adicionarReceitaNoResumo(transacoes)
+        val resumoView = ResumoView(view, transacoes)
+        resumoView.adicionarReceita()
+        resumoView.adicionarDespesa()
     }
 
     private fun configurarLista(transacoes: List<Transacao>) {
