@@ -4,10 +4,12 @@ import android.os.Bundle
 import java.math.BigDecimal
 import com.example.financask.R
 import androidx.appcompat.app.AppCompatActivity
+import com.example.financask.extension.formatarParaBrasileiro
 import com.example.financask.model.Tipo
 import com.example.financask.model.Transacao
 import com.example.financask.ui.adapter.ListaTransacoesAdapter
 import kotlinx.android.synthetic.main.activity_lista_transacoes.*
+import kotlinx.android.synthetic.main.resumo_card.*
 import java.util.*
 
 class ListaTransacoesActivity : AppCompatActivity() {
@@ -18,7 +20,18 @@ class ListaTransacoesActivity : AppCompatActivity() {
 
         val transacoes: List<Transacao> = transacoesDeExemplo()
 
+        adicionarReceitaNoResumo(transacoes)
         configurarLista(transacoes)
+    }
+
+    private fun adicionarReceitaNoResumo(transacoes: List<Transacao>) {
+        var totalReceita = BigDecimal.ZERO
+        for (transacao in transacoes) {
+            if (transacao.tipo == Tipo.RECEITA) {
+                totalReceita = totalReceita.plus(transacao.valor)
+            }
+        }
+        resumo_card_receita.text = totalReceita.formatarParaBrasileiro()
     }
 
     private fun configurarLista(transacoes: List<Transacao>) {
