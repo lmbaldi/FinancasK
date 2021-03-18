@@ -27,18 +27,30 @@ class AdicionaTransacaoDialog(
 
     private val viewCriada = criarLayout()
 
-    fun configurarDialog(transacaoDelegate: TransacaoDelegate) {
+    private fun criarLayout(): View {
+        return LayoutInflater.from(context)
+            .inflate(R.layout.form_transacao, viewGroup, false)
+    }
+
+    fun configurarDialog(tipo: Tipo, transacaoDelegate: TransacaoDelegate) {
 
         configurarCampoData()
 
-        configuarCampoCategoria()
+        configurarCampoCategoria(tipo)
 
-        configurarFormulario(transacaoDelegate)
+        configurarFormulario(tipo, transacaoDelegate)
     }
 
-    private fun configurarFormulario(transacaoDelegate: TransacaoDelegate) {
+    private fun configurarFormulario(tipo: Tipo, transacaoDelegate: TransacaoDelegate) {
+
+        val titulo = if(tipo == Tipo.RECEITA){
+            R.string.adiciona_receita
+        } else {
+            R.string.adiciona_despesa
+        }
+
         AlertDialog.Builder(context)
-            .setTitle(R.string.adiciona_receita)
+            .setTitle(titulo)
             .setView(viewCriada)
             .setPositiveButton("Adicionar", DialogInterface.OnClickListener { _, _ ->
 
@@ -48,7 +60,7 @@ class AdicionaTransacaoDialog(
                 val valor = converteCampoValor(valorEmTetxto)
                 val data = dataEmTexto.converterParaCalendar()
                 val transacaoCriada = Transacao(
-                    tipo = Tipo.RECEITA,
+                    tipo = tipo,
                     valor = valor,
                     data = data,
                     categoria = categoriaEmTexto
@@ -70,12 +82,20 @@ class AdicionaTransacaoDialog(
         }
     }
 
-    private fun configuarCampoCategoria() {
+    private fun configurarCampoCategoria(tipo: Tipo) {
+
+        val categorias = if(tipo == Tipo.RECEITA){
+            R.array.categorias_de_receita
+        } else {
+            R.array.categorias_de_despesa
+        }
+
         val adapter = ArrayAdapter
-            .createFromResource(
-                context, R.array.categorias_de_receita,
+            .createFromResource(context,
+               categorias ,
                 android.R.layout.simple_spinner_dropdown_item
             )
+
         viewCriada.form_transacao_categoria.adapter = adapter
     }
 
@@ -99,8 +119,5 @@ class AdicionaTransacaoDialog(
         }
     }
 
-    private fun criarLayout(): View {
-        return LayoutInflater.from(context)
-            .inflate(R.layout.form_transacao, viewGroup, false)
-    }
+
 }

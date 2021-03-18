@@ -40,12 +40,22 @@ class ListaTransacoesActivity : AppCompatActivity() {
 
         lista_transacoes_adiciona_receita.setOnClickListener {
            AdicionaTransacaoDialog(window.decorView as ViewGroup, this)
-               .configurarDialog( object : TransacaoDelegate{
+               .configurarDialog(Tipo.RECEITA,  object : TransacaoDelegate{
                    override fun delegate(transacao: Transacao) {
                        atualizarTransacoes(transacao)
                        lista_transacoes_adiciona_menu.close(true)
                    }
                })
+        }
+
+        lista_transacoes_adiciona_despesa.setOnClickListener{
+            AdicionaTransacaoDialog( window.decorView as ViewGroup, this)
+                .configurarDialog(Tipo.DESPESA, object : TransacaoDelegate{
+                    override fun delegate(transacao: Transacao) {
+                        atualizarTransacoes(transacao)
+                        lista_transacoes_adiciona_menu.close(true)
+                    }
+                })
         }
     }
 
