@@ -11,8 +11,8 @@ import com.example.financask.model.Resumo
 import java.math.BigDecimal
 
 class ResumoView(
-    private val context: Context,
-    private val view: View,
+    context: Context,
+    private val view: View?,
     transacoes: List<Transacao>
 ) {
 
@@ -29,26 +29,32 @@ class ResumoView(
 
     private fun adicionarReceita() {
        val totalReceita = resumo.receita
-        with(view.resumo_card_receita){
-            setTextColor(corReceita)
-            text = totalReceita.formatarParaBrasileiro()
-        }
+       view?.let {
+            with(view.resumo_card_receita){
+                setTextColor(corReceita)
+                text = totalReceita.formatarParaBrasileiro()
+            }
+       }
     }
 
     private fun adicionarDespesa() {
       val totalDespesa = resumo.despesa
-      with(view.resumo_card_despesa) {
-        setTextColor(corDespesa)
-        text = totalDespesa.formatarParaBrasileiro()
-      }
+        view?.let {
+          with(view.resumo_card_despesa) {
+            setTextColor(corDespesa)
+            text = totalDespesa.formatarParaBrasileiro()
+          }
+        }
     }
 
     private fun adicionarTotal(){
         val total = resumo.total
         val cor = corPor(total)
-        with(view.resumo_card_total){
-            setTextColor(cor)
-            text = total.formatarParaBrasileiro()
+        view?.let{
+            with(view.resumo_card_total){
+                setTextColor(cor)
+                text = total.formatarParaBrasileiro()
+            }
         }
     }
 
