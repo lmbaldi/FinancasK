@@ -18,7 +18,7 @@ class ListaTransacoesActivity : AppCompatActivity() {
 
     private val transacoes: MutableList<Transacao> = mutableListOf()
 
-    private var viewDaActivity: View? = null
+    private lateinit var viewDaActivity: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
