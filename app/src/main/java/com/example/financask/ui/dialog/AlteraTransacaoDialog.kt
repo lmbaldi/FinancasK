@@ -3,7 +3,6 @@ package com.example.financask.ui.dialog
 import android.content.Context
 import android.view.ViewGroup
 import com.example.financask.R
-import com.example.financask.delegate.TransacaoDelegate
 import com.example.financask.extension.formataParaBrasileiro
 import com.example.financask.model.Tipo
 import com.example.financask.model.Transacao
@@ -13,9 +12,9 @@ class AlteraTransacaoDialog(
     private val context: Context
 ) :  FormularioTransacaoDialog(context, viewGroup) {
 
-    fun configurarDialog(transacao: Transacao, transacaoDelegate: TransacaoDelegate) {
+    fun configurarDialog(transacao: Transacao, delegate: (transacao: Transacao) -> Unit) {
         val tipo = transacao.tipo
-        super.configurarDialog(tipo, transacaoDelegate)
+        super.configurarDialog(tipo, delegate)
         inicializarCampos(transacao)
     }
 
